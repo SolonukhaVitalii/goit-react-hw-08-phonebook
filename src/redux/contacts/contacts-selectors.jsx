@@ -12,4 +12,6 @@ const filteredItems = createSelector([getFilter, getItems], (filter, items) => {
   );
 });
 
-export default { getItems, getFilter, filteredItems };
+const Selectors = { getItems, getFilter, filteredItems };
+
+export default Selectors;

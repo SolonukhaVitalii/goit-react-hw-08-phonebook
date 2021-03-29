@@ -16,4 +16,18 @@ const changeFilter = createAction('contacts/changeFilter');
 
 const resetFilter = createAction('contscts/resetFilter');
 
-export default { fetchContactsRequest, fetchContactsSuccess, fetchContactsError, addContactRequest, addContactSuccess, addContactError, deleteContactRequest, deleteContactSuccess, deleteContactError, changeFilter, resetFilter };
+const Actions = {
+  changeFilter,
+  resetFilter,
+  fetchContactsRequest,
+  fetchContactsSuccess,
+  fetchContactsError,
+  addContactRequest,
+  addContactSuccess,
+  addContactError,
+  deleteContactRequest,
+  deleteContactSuccess,
+  deleteContactError,
+};
+
+export default Actions;
