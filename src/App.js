@@ -1,60 +1,81 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import ContactForm from './components/ContactForm';
-import Filter from './components/Filter';
-import ContactList from './components/ContactList';
+import React, { lazy, Suspense, Component } from 'react';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import { authOperations } from './redux/auth';
+import { loadingSelectors } from './redux/loading';
 import { connect } from 'react-redux';
-import { contactsOperations, contactsSelectors } from './redux/contacts/';
-import { CSSTransition } from 'react-transition-group';
-import './App.css';
-import titleTransition from './transitions/title.module.css';
-import popTransition from './transitions/pop.module.css';
+import routes from './routes';
+import { ToastContainer, Zoom } from 'react-toastify';
+import AppBar from './components/AppBar';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
+import Container from './components/Container';
+import Spinner from './components/Spinner';
+import 'react-toastify/dist/ReactToastify.min.css';
+
+const ContactsView = lazy(() =>
+  import('./views/ContactsView' /* webpackChunkName: "ContactsView" */),
+);
+const LoginView = lazy(() =>
+  import('./views/LoginView' /* webpackChunkName: "LoginView" */),
+);
+const RegisterView = lazy(() =>
+  import('./views/RegisterView' /* webpackChunkName: "RegisterView" */),
+);
 
 class App extends Component {
   componentDidMount() {
-    this.props.fetchContacts();
+    this.props.onGetCurrentUser();
   }
 
   render() {
-    const { items } = this.props;
-
     return (
-      <div className="app">
-        <CSSTransition
-          in timeout={500}
-          classNames={titleTransition}
-          appear>
-          <h1 className="title">Phonebook</h1>
-        </CSSTransition>
-        <ContactForm />
-        {items.length > 1 &&
-          <CSSTransition
-            in timeout={250}
-            classNames={popTransition}
-            unmountOnExit>
-            <Filter />
-          </CSSTransition>}
-        {items.length > 0 ? (
-          <ContactList />
-        ) : (
-          <p>The contact list is empty. Please add a new contact.</p>
-        )}
-      </div>
+      <>
+        <AppBar />
+        <Container>
+          <Suspense fallback={<Spinner />}>
+            <Switch>
+              <Route exact path="/">
+                <Redirect to={routes.login} />
+              </Route>
+              <PrivateRoute
+                path={routes.contacts}
+                component={ContactsView}
+                redirectTo={routes.login}
+              />
+              <PublicRoute
+                path={routes.login}
+                restricted
+                redirectTo={routes.contacts}
+                component={LoginView}
+              />
+              <PublicRoute
+                path={routes.register}
+                restricted
+                redirectTo={routes.contacts}
+                component={RegisterView}
+              />
+            </Switch>
+          </Suspense>
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            newestOnTop
+            limit={3}
+            transition={Zoom}
+          />
+        </Container>
+        {this.props.isLoading && <Spinner />}
+      </>
     );
   }
-};
+}
 
 const mapStateToProps = state => ({
-  items: contactsSelectors.getItems(state),
+  isLoading: loadingSelectors.getIsLoading(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchContacts: () => dispatch(contactsOperations.fetchContacts()),
-});
-
-App.propTypes = {
-  items: PropTypes.array.isRequired,
-  fetchContacts: PropTypes.func.isRequired,
+const mapDispatchToProps = {
+  onGetCurrentUser: authOperations.getCurrentUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
