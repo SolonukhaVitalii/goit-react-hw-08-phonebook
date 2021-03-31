@@ -13,12 +13,12 @@ const AuthNav = () => (
   <div className={styles.authNav}>
     <MyButton>
       <MyNavLink to="/register" exact>
-        Регистрация
+        Реєстрація
       </MyNavLink>
     </MyButton>
     <MyButton>
       <MyNavLink to="/login" exact>
-        Логин
+        Вхід
       </MyNavLink>
     </MyButton>
   </div>

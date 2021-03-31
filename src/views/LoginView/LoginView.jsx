@@ -47,7 +47,7 @@ class LoginView extends Component {
 
     return (
       <div>
-        <h1 className={styles.header}>Страница логина</h1>
+        <h1 className={styles.header}>Сторінка для входу</h1>
 
         <form
           onSubmit={this.handleSubmit}
@@ -60,7 +60,7 @@ class LoginView extends Component {
             name="email"
             value={email}
             onChange={this.handleChange}
-            label="Почта"
+            label="Пошта"
           />
 
           <TextField
@@ -73,7 +73,7 @@ class LoginView extends Component {
             label="Пароль"
           />
 
-          <MyButton type="submit">Войти</MyButton>
+          <MyButton type="submit">Вхід</MyButton>
         </form>
       </div>
     );

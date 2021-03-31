@@ -1,6 +1,5 @@
 import React from 'react';
 import Modal from '../Modal';
-
 import RotateLoader from 'react-spinners/RotateLoader';
 import { css } from '@emotion/core';
 

@@ -49,7 +49,7 @@ class RegisterView extends Component {
 
     return (
       <div>
-        <h1 className={styles.header}>Страница регистрации</h1>
+        <h1 className={styles.header}>Сторінка для реєстрації</h1>
 
         <form
           onSubmit={this.handleSubmit}
@@ -62,7 +62,7 @@ class RegisterView extends Component {
             name="name"
             value={name}
             onChange={this.handleChange}
-            label="Имя"
+            label="Ім'я"
           />
 
           <TextField
@@ -71,7 +71,7 @@ class RegisterView extends Component {
             name="email"
             value={email}
             onChange={this.handleChange}
-            label="Почта"
+            label="Пошта"
           />
 
           <TextField
@@ -84,7 +84,7 @@ class RegisterView extends Component {
             label="Пароль"
           />
 
-          <MyButton type="submit">Зарегистрироваться</MyButton>
+          <MyButton type="submit">Зареєструватися</MyButton>
         </form>
       </div>
     );

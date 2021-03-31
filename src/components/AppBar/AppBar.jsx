@@ -4,7 +4,6 @@ import AuthNav from '../AuthNav';
 import UserMenu from '../UserMenu';
 import { connect } from 'react-redux';
 import { authSelectors } from '../../redux/auth';
-
 import MaterialAppBar from '@material-ui/core/AppBar';
 import MaterialToolbar from '@material-ui/core/Toolbar';
 import { styled } from '@material-ui/core/styles';

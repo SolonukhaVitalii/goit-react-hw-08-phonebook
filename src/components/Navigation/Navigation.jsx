@@ -16,7 +16,7 @@ const Navigation = ({ isAuthenticated }) => (
     {isAuthenticated && (
       <MyButton className={styles.btn}>
         <MyNavLink to="/contacts" exact>
-          Контакты
+          Контакти
         </MyNavLink>
       </MyButton>
     )}
