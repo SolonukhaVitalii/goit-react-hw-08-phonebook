@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import s from './ContactForm.module.css';
+import styles from './ContactForm.module.css';
 import { toast } from 'react-toastify';
 
+import MaterialButton from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import { styled } from '@material-ui/core/styles';
 
 class ContactForm extends Component {
   state = {
@@ -55,38 +58,50 @@ class ContactForm extends Component {
       this.reset();
     }
   };
-    
+
   render() {
     const { name, number } = this.state;
-      return (
-        <form onSubmit={this.handleSubmit} className={s.form}>
-        <label className={s.label}>
-            Name
-             <input
-              className={s.input}
-              type="text"
-              name="name"
-              value={name}
-              onChange={this.handleChange}
-              id={this.nameInputId}
-            /> 
-        </label>
-        <label className={s.label}>
-            Number
-             <input
-              className={s.input}
-              type="text"
-              name="number"
-              value={number}
-              onChange={this.handleChange}
-              id={this.numberInputId}
-            /> 
-        </label>
-        <button type="submit" className={s.button}>Add contact</button>
-        </form>
-      );
+
+    const MyButton = styled(MaterialButton)({
+      width: 'fit-content',
+      backgroundColor: 'olive',
+      color: 'rgba(0, 0, 0, 0.87)',
+      boxShadow: '2px 2px 3px 0px rgba(0, 0, 0, 0.25)',
+    });
+
+    return (
+      <form className={styles.form} onSubmit={this.handleSubmit}>
+        <TextField
+          className={styles.input}
+          size="small"
+          label="Name"
+          variant="outlined"
+          type="text"
+          name="name"
+          value={name}
+          onChange={this.handleChange}
+          id={this.nameInputId}
+          autoComplete="off"
+        />
+
+        <TextField
+          size="small"
+          label="Number"
+          variant="outlined"
+          className={styles.input}
+          type="tel"
+          name="number"
+          value={number}
+          onChange={this.handleChange}
+          id={this.numberInputId}
+          autoComplete="off"
+        />
+
+        <MyButton type="submit">Add contact</MyButton>
+      </form>
+    );
   }
-};
+}
 
 ContactForm.propTypes = {
   addContact: PropTypes.func.isRequired,

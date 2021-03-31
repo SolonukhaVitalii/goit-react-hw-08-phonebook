@@ -1,21 +1,22 @@
 import React from 'react';
-import ContactItem from '../ContactItem';
-import s from './ContactList.module.css';
+import ContactItem from './ContactItem';
 import PropTypes from 'prop-types';
 
+import List from '@material-ui/core/List';
+
 const ContactList = ({ contacts, deleteContact }) => {
-    return (
-      <ul className={s.list}>
+  return (
+    <List>
       {contacts &&
-          contacts.map(({ id, name, number }) => (
+        contacts.map(({ id, name, number }) => (
           <ContactItem
             key={id}
             name={name}
             number={number}
             onDelete={() => deleteContact(id)}
           />
-          ))}
-    </ul>
+        ))}
+    </List>
   );
 };
 

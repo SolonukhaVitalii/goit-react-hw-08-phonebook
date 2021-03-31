@@ -1,4 +1,3 @@
-  
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ContactForm from '../../components/ContactForm';
@@ -7,7 +6,6 @@ import Filter from '../../components/Filter';
 import { ToastContainer, Zoom } from 'react-toastify';
 import { connect } from 'react-redux';
 import { contactsOperations, contactsSelectors } from '../../redux/contacts';
-
 import styles from './ContactsView.module.css';
 import 'react-toastify/dist/ReactToastify.css';
 
