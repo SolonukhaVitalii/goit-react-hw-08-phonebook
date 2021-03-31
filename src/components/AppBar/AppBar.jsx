@@ -10,7 +10,7 @@ import { styled } from '@material-ui/core/styles';
 
 const MyToolbar = styled(MaterialToolbar)({
   justifyContent: 'space-between',
-  backgroundColor: 'olive',
+  backgroundColor: 'green',
 });
 
 const AppBar = ({ isAuthenticated }) => (
